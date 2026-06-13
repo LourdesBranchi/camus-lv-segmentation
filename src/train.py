@@ -180,7 +180,6 @@ def train(config: dict) -> dict:
         mode="max",        # maximizar Dice
         factor=0.5,        # reducir LR a la mitad
         patience=5,        # si no mejora en 5 épocas
-        verbose=True,
     )
     early_stopping = EarlyStopping(patience=config["patience"])
 

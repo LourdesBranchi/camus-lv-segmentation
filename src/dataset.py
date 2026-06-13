@@ -52,13 +52,13 @@ def get_train_transforms(image_size: int = IMAGE_SIZE) -> A.Compose:
     return A.Compose([
         A.Resize(image_size, image_size),
         A.Rotate(limit=10, p=0.5),
-        A.RandomScale(scale_limit=0.1, p=0.5),
+        A.Affine(scale=(0.9, 1.1), p=0.5),
         A.PadIfNeeded(min_height=image_size, min_width=image_size,
                       border_mode=0, p=1.0),
         A.CenterCrop(height=image_size, width=image_size, p=1.0),
         A.RandomBrightnessContrast(brightness_limit=0.2,
                                    contrast_limit=0.2, p=0.5),
-        A.GaussNoise(var_limit=(10.0, 50.0), p=0.3),
+        A.GaussNoise(std_limit=(3.16, 7.07), p=0.3),
         A.Normalize(mean=[0.0], std=[1.0]),   # ya normalizamos en __getitem__
         ToTensorV2(),
     ])
