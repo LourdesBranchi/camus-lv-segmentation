@@ -132,7 +132,8 @@ class CamusDataset(Dataset):
         if self.transform:
             augmented = self.transform(image=image_3ch, mask=mask_2d)
             image_t   = augmented["image"]   # tensor (3, H, W) por ToTensorV2
-            mask_t    = torch.as_tensor(augmented["mask"]).long()
+            mask_t    = augmented["mask"].long()
+
         else:
             image_t = torch.from_numpy(image_3ch.transpose(2, 0, 1)).float()
             mask_t  = torch.from_numpy(mask_2d).long()
