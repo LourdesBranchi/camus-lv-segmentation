@@ -145,6 +145,7 @@ def visualize_predictions(
 
     for i in range(n):
         img  = images_all[i, 0].numpy()          # (H, W) — grayscale
+        img_display = (img - img.min()) / (img.max() - img.min() + 1e-8)
         mask = masks_all[i].numpy()               # (H, W)
         pred = preds_all[i].numpy()               # (H, W)
 
@@ -157,16 +158,16 @@ def visualize_predictions(
                          ((pred == 3).sum() + (mask == 3).sum() + 1e-6))
 
         # Columna 0: imagen ecográfica
-        axes[i, 0].imshow(img, cmap="gray", vmin=0, vmax=1)
+        axes[i, 0].imshow(img_display, cmap="gray")
         axes[i, 0].axis("off")
 
         # Columna 1: ground truth
-        axes[i, 1].imshow(img, cmap="gray", vmin=0, vmax=1)
+        axes[i, 1].imshow(img_display, cmap="gray")
         axes[i, 1].imshow(mask_to_rgb(mask), alpha=0.5)
         axes[i, 1].axis("off")
 
         # Columna 2: predicción + métricas
-        axes[i, 2].imshow(img, cmap="gray", vmin=0, vmax=1)
+        axes[i, 2].imshow(img_display, cmap="gray")
         axes[i, 2].imshow(mask_to_rgb(pred), alpha=0.5)
         axes[i, 2].set_xlabel(
             f"LV={dice_lv:.2f}  MYO={dice_myo:.2f}  LA={dice_la:.2f}",
