@@ -21,6 +21,10 @@ resultados/
 *.png
 *.jpg
 
+# Excepción — imágenes de muestra para la demo
+!sample_images/
+!sample_images/*.png
+
 # VS Code
 .vscode/
 
