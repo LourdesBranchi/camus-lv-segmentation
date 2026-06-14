@@ -59,7 +59,6 @@ def get_train_transforms(image_size: int = IMAGE_SIZE) -> A.Compose:
         A.RandomBrightnessContrast(brightness_limit=0.2,
                                    contrast_limit=0.2, p=0.5),
         A.GaussNoise(std_limit=(3.16, 7.07), p=0.3),
-        A.Normalize(mean=[0.0], std=[1.0]),   # ya normalizamos en __getitem__
         ToTensorV2(),
     ])
 
@@ -68,7 +67,6 @@ def get_val_transforms(image_size: int = IMAGE_SIZE) -> A.Compose:
     """Sin augmentation — solo resize y conversión a tensor."""
     return A.Compose([
         A.Resize(image_size, image_size),
-        A.Normalize(mean=[0.0], std=[1.0]),
         ToTensorV2(),
     ])
 

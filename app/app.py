@@ -115,25 +115,13 @@ def load_model(model_choice: str, ckpt_path: str):
 
 
 def preprocess_image(image: Image.Image) -> torch.Tensor:
-    """
-    Preprocesa una imagen PIL para el modelo.
-
-    Pasos:
-    1. Convertir a escala de grises
-    2. Redimensionar a 256x256
-    3. Normalizar a [0, 1]
-    4. Convertir a tensor (1, 1, H, W)
-    """
     img_gray = image.convert("L")
     img_resized = img_gray.resize((IMAGE_SIZE, IMAGE_SIZE), Image.BILINEAR)
     img_array = np.array(img_resized, dtype=np.float32)
-
-    # Normalización min-max
     img_min, img_max = img_array.min(), img_array.max()
     if img_max > img_min:
         img_array = (img_array - img_min) / (img_max - img_min)
-
-    tensor = torch.from_numpy(img_array).unsqueeze(0).unsqueeze(0)  # (1,1,H,W)
+    tensor = torch.from_numpy(img_array).unsqueeze(0).unsqueeze(0)
     return tensor
 
 
