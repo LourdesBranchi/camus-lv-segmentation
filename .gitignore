@@ -1,0 +1,29 @@
+# Checkpoints (archivos muy pesados)
+checkpoints/
+
+# Dataset (no se sube al repo)
+datos_corazon/
+dataset_raw/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Resultados y figuras generadas
+resultados/
+*.png
+*.jpg
+
+# VS Code
+.vscode/
+
+# Sistema
+.DS_Store
+Thumbs.db
