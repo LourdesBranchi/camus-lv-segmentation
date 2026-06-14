@@ -175,19 +175,16 @@ Se abre automáticamente en el navegador en `http://localhost:8501`.
 4. Hacé click en **Segmentar**
 5. El resultado muestra la imagen original, la segmentación y el overlay con las estructuras detectadas
 
-> **Imágenes de prueba:** podés usar cualquier ecocardiograma 2D en escala de grises. El modelo fue entrenado con vistas apical de 2 y 4 cámaras del dataset CAMUS.
-
+> **Imágenes de prueba:** podés usar cualquier ecocardiograma 2D en escala de grises. El modelo fue entrenado con vistas apical de 2 y 4 cámaras del dataset CAMUS. De todas formas, el repositorio incluye 6 ecocardiogramas de ejemplo en la carpeta `sample_images/`, extraídos del conjunto de test del dataset CAMUS. Estas imagenes pueden ser usadas directamente para probar la interfaz sin necesidad de conseguir imágenes propias.
 ---
 
 ## Resultados
 
 | Modelo | Dice LV | Dice MYO | Dice LA | Mean Dice |
 |--------|---------|----------|---------|-----------|
-| U-Net + ResNet34 | — | — | — | — |
-| Attention U-Net + EfficientNet-B0 | — | — | — | — |
-| Referencia (Leclerc et al., 2019) | 0.94 | 0.85 | 0.89 | 0.89 |
-
-*Se completará tras el entrenamiento final.*
+| U-Net + ResNet34 | 0.940 | 0.877 | 0.908 | 0.908 |
+| Attention U-Net + EfficientNet-B0 | 0.937 | 0.870 | 0.905 | 0.904 |
+| Referencia (Leclerc et al., 2019) | 0.940 | 0.850 | 0.890 | 0.890 |
 
 ---
 
