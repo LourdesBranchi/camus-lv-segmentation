@@ -58,8 +58,7 @@ def get_train_transforms(image_size: int = IMAGE_SIZE) -> A.Compose:
         A.CenterCrop(height=image_size, width=image_size, p=1.0),
         A.RandomBrightnessContrast(brightness_limit=0.2,
                                    contrast_limit=0.2, p=0.5),
-        A.GaussNoise(std_limit=(3.16, 7.07), p=0.3),
-        ToTensorV2(),
+        A.GaussNoise(p=0.3),
     ])
 
 
@@ -67,7 +66,6 @@ def get_val_transforms(image_size: int = IMAGE_SIZE) -> A.Compose:
     """Sin augmentation — solo resize y conversión a tensor."""
     return A.Compose([
         A.Resize(image_size, image_size),
-        ToTensorV2(),
     ])
 
 
@@ -129,8 +127,10 @@ class CamusDataset(Dataset):
 
         if self.transform:
             augmented = self.transform(image=image_3ch, mask=mask_2d)
-            image_t   = augmented["image"]   # tensor (3, H, W) por ToTensorV2
-            mask_t    = augmented["mask"].long()
+            image_out = augmented["image"]   # numpy HxWx3
+            mask_out  = augmented["mask"]    # numpy HxW
+            image_t = torch.from_numpy(image_out.transpose(2, 0, 1)).float()
+            mask_t  = torch.from_numpy(np.array(mask_out)).long()
 
         else:
             image_t = torch.from_numpy(image_3ch.transpose(2, 0, 1)).float()
