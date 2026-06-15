@@ -21,8 +21,6 @@ Modelo 2 — Attention U-Net + EfficientNet-B0:
   mejoran la segmentación de estructuras con bordes difusos, exactamente
   el caso del miocaridio en ecocardiogramas. EfficientNet-B0 es más
   eficiente que ResNet34 con resultados similares o mejores.
-  Referencia comparativa: Degerli et al. (2023), LV segmentation en
-  ecocardiografía transesofágica, Attention U-Net DSC = 0.92.
 """
 
 import torch
