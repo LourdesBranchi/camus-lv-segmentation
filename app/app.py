@@ -65,9 +65,15 @@ with st.sidebar:
         help="Seleccioná el modelo a usar para la predicción"
     )
 
+    default_ckpt = (
+        "checkpoints/best_unet_resnet34.pth"
+        if model_choice == "U-Net + ResNet34"
+        else "checkpoints/best_attention-unet_efficientnet-b0.pth"
+    )
+
     ckpt_path = st.text_input(
         "Ruta al checkpoint (.pth)",
-        value="checkpoints/best_unet_resnet34.pth",
+        value=default_ckpt,
         help="Ruta al archivo de pesos guardado durante el entrenamiento"
     )
 
