@@ -137,7 +137,8 @@ def visualize_predictions(
 
     n = len(images_all)
     fig, axes = plt.subplots(n, 3, figsize=(12, n * 4))
-    fig.suptitle(f"Predicciones — {model_name}", fontsize=14, fontweight="bold")
+    fig.suptitle(f"Predicciones — {model_name}", fontsize=14, fontweight="bold", y=1.02)
+
 
     col_titles = ["Imagen Ecográfica", "Ground Truth", "Predicción"]
     for col, title in enumerate(col_titles):
@@ -185,6 +186,7 @@ def visualize_predictions(
                ncol=3, fontsize=10, bbox_to_anchor=(0.5, 0))
 
     plt.tight_layout(rect=[0, 0.04, 1, 1])
+    plt.subplots_adjust(top=0.93)
 
     if save_path:
         plt.savefig(save_path, dpi=150, bbox_inches="tight")
