@@ -1,7 +1,7 @@
 # Segmentación Automática del Ventrículo Izquierdo en Ecocardiogramas 2D
 
-Trabajo Práctico Final — Visión por Computadora II  
-Carrera de Especialización en Inteligencia Artificial (CEIA) — FIUBA
+Trabajo Práctico Final - Visión por Computadora II  
+Carrera de Especialización en Inteligencia Artificial (CEIA) - FIUBA
 
 ## Descripción
 
@@ -13,12 +13,12 @@ Se utiliza transfer learning con encoders preentrenados en ImageNet, combinado c
 
 | Modelo | Encoder | Params aprox. |
 |--------|---------|---------------|
-| U-Net | ResNet-34 (ImageNet) | ~24M |
-| Attention U-Net | EfficientNet-B0 (ImageNet) | ~6M |
+| U-Net | ResNet-34 (pre entrenado en ImageNet) | ~24M |
+| Attention U-Net | EfficientNet-B0 (pre entrenado en ImageNet) | ~6M |
 
 ### Métricas reportadas
 
-- **Dice Coefficient** por clase (LV, MYO, LA) — métrica principal
+- **Dice Coefficient** por clase (LV, MYO, LA) - métrica principal
 - **IoU (Intersection over Union)** por clase
 - **Mean Dice** sobre las 3 estructuras cardíacas
 
@@ -73,14 +73,14 @@ camus-lv-segmentation/
 Los notebooks descargan el dataset automáticamente desde Kaggle. Para esto necesitás configurar tu API key **una sola vez**:
 
 1. Entrá a [kaggle.com](https://www.kaggle.com) → tu perfil → **Settings** → **API** → **Create New Token**
-2. Se descarga un archivo `kaggle.json` con este formato:
+2. Se genera la key con este formato:
 ```json
 {"username":"tu_usuario","key":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}
 ```
 3. En Google Colab, abrí el panel de **Secrets** (ícono 🔑 en el panel izquierdo)
 4. Creá un nuevo secret con:
    - **Name:** `KAGGLE_API_TOKEN`
-   - **Value:** el contenido completo del `kaggle.json`
+   - **Value:** el contenido completo otorgado por kaggle
 5. Activá el toggle **"Notebook access"** para habilitarlo en el notebook actual
 
 > ⚠️ Este secret hay que habilitarlo cada vez que abrís un notebook nuevo en Colab.
@@ -105,7 +105,7 @@ Los notebooks descargan el dataset automáticamente desde Kaggle. Para esto nece
 
 5. Las figuras generadas se guardan automáticamente en:
 ```
-Google Drive → Mi unidad → camus_checkpoints/
+Google Drive → Mi unidad → camus_eda/
 ```
 
 ---
@@ -120,11 +120,11 @@ Google Drive → Mi unidad → camus_checkpoints/
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/LourdesBranchi/camus-lv-segmentation/blob/main/notebooks/02_train_colab.ipynb)
 
-2. **Cambiar a GPU** (obligatorio): Runtime → Change runtime type → **T4 GPU** → Save
+2. **Cambiar a GPU** (obligatorio): Elegir **T4 GPU** en el entorno de ejecución.
 
-3. Verificá que el Secret de Kaggle esté habilitado para este notebook
+3. Verificá que el Secret de Kaggle esté habilitado para este notebook.
 
-4. **Configurar la carpeta de Drive** donde se guardan los checkpoints — en la celda de setup de Drive, verificá que `DRIVE_DIR` apunte a la carpeta que querés:
+4. **Configurar la carpeta de Drive** donde se guardan los checkpoints. En la celda de setup de Drive, verificá que `DRIVE_DIR` apunte a la carpeta que querés:
 ```python
 DRIVE_DIR = '/content/drive/MyDrive/camus_checkpoints'
 ```
@@ -151,7 +151,7 @@ cd camus-lv-segmentation
 pip install -r requirements.txt
 ```
 
-2. Descargar los checkpoints entrenados desde Google Drive y colocarlos en:
+2. Descargar los checkpoints entrenados desde Google Drive y colocarlos en una carpeta llamada checkpoints:
 ```
 camus-lv-segmentation/
 └── checkpoints/
@@ -175,7 +175,7 @@ Se abre automáticamente en el navegador en `http://localhost:8501`.
 4. Hacé click en **Segmentar**
 5. El resultado muestra la imagen original, la segmentación y el overlay con las estructuras detectadas
 
-> **Imágenes de prueba:** podés usar cualquier ecocardiograma 2D en escala de grises. El modelo fue entrenado con vistas apical de 2 y 4 cámaras del dataset CAMUS. De todas formas, el repositorio incluye 6 ecocardiogramas de ejemplo en la carpeta `sample_images/`, extraídos del conjunto de test del dataset CAMUS. Estas imagenes pueden ser usadas directamente para probar la interfaz sin necesidad de conseguir imágenes propias.
+> **Imágenes de prueba:** podés usar cualquier ecocardiograma 2D en escala de grises, pero teniendo en cuenta que el modelo fue entrenado con vistas apical de 2 y 4 cámaras del dataset CAMUS. De todas formas, el repositorio incluye 6 ecocardiogramas de ejemplo en la carpeta `sample_images/`, extraídos del conjunto de test del dataset CAMUS. Estas imagenes pueden ser usadas directamente para probar la interfaz sin necesidad de conseguir imágenes propias.
 ---
 
 ## Resultados
@@ -184,7 +184,6 @@ Se abre automáticamente en el navegador en `http://localhost:8501`.
 |--------|---------|----------|---------|-----------|
 | U-Net + ResNet34 | 0.940 | 0.877 | 0.908 | 0.908 |
 | Attention U-Net + EfficientNet-B0 | 0.937 | 0.870 | 0.905 | 0.904 |
-| Referencia (Leclerc et al., 2019) | 0.940 | 0.850 | 0.890 | 0.890 |
 
 ---
 
